@@ -1,8 +1,6 @@
 const request = require("supertest");
-import * as server from "../server";
-import { app } from "../server"; // Certifique-se de que o caminho está correto
-import { Request, Response } from "express";
 import { Cliente } from "../models/Cliente";
+import { app } from "../server"; // Certifique-se de que o caminho está correto
 
 describe("Teste da Rota incluirCliente", () => {
   let clienteId: number;
@@ -69,9 +67,9 @@ describe("Teste da Rota GetClienteById", () => {
 describe("Teste da Rota listarClientes", () => {
   it("Deve retornar uma lista de clientes", async () => {
     const response = await request(app).get("/clientes");
-
-    expect(response.status).toBe(200);
-    expect(response.body.clientes).toBeInstanceOf(Array);
+      expect(response.status).toBe(200);
+      expect(response.body.clientes).toBeInstanceOf(Array);
+  
   });
 
   it("Deve retornar a lista de clientes dentro de um tempo aceitavel", async () => {

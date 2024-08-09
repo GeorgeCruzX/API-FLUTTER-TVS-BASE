@@ -1,13 +1,16 @@
 import { Request, Response } from "express";
-import { Produto } from "../models/Produto";
+import { Op } from "sequelize";
 import { Cliente } from "../models/Cliente";
 import { Pedido } from "../models/Pedido";
-import { Op } from "sequelize";
 
 export const listarClientes = async (req: Request, res: Response) => {
   try {
     const clientes = await Cliente.findAll();
-    res.json({ clientes });
+    if(clientes.length === 0){
+      res.status(404).json({message: "Nenhum cliente encontrado"});
+    }else{
+      res.json({ clientes });
+    }
   } catch (error) {
     console.error("Erro ao listar clientes:", error);
     res.status(500).json({ message: "Erro ao listar clientes" });
